@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useContext, createContext, ReactNode, useCallback } from "react";
+import React, { useState, useEffect, createContext, ReactNode, useCallback } from "react";
 
-interface Book {
-  // Define the structure of a book
-}
+import { Book } from "./components/interfaces/Book.Interface";
 
 interface AppContextType {
   loading: boolean;
   books: Book[];
-  searchTerm: string;
   setSearchTerm: (term: string) => void;
   resultTitle: string;
   setResultTitle: (title: string) => void;
@@ -15,11 +12,11 @@ interface AppContextType {
 
 const URL = "https://openlibrary.org/search.json?title=";
 
-const AppContext = createContext<AppContextType | undefined>(undefined);
+const AppContext = createContext<AppContextType | null>(null);
 
 
 const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [searchTerm, setSearchTerm] = useState<string>("the lost world");
+  const [searchTerm, setSearchTerm] = useState<string>("The Lost World");
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [resultTitle, setResultTitle] = useState<string>('');
@@ -30,12 +27,38 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     try {
       const response = await fetch(`${URL}${searchTerm}`);
       const data = await response.json();
-      console.log(data);
+      console.log('Books:', data);
+      
+      const { docs } = data; 
+      if (docs) {
+        const newBooks = docs.slice(0, 20).map((bookSingle: Book) => {
+          const {key, author_name, cover_i, edition_count, first_publish_year, title, cover_img} = bookSingle;
 
-      // Extract relevant data from 'data' and update state
-      // const { docs } = data;
+          return {
+            id: key,
+            author: author_name,
+            edition_count,
+            cover_id: cover_i,
+            first_publish_year,
+            title,
+            cover_img
+          }
+        });
+        setBooks(newBooks);
+
+        if(newBooks.length> 1) {
+          setResultTitle("Your search result")
+        } else {
+          setResultTitle("No books found")
+        }
+      } else {
+        setBooks([]);
+        setResultTitle("No books found")
+      }
+      setLoading(false)
+
     } catch (error) {
-      console.log(error);
+      console.log(error)
       setLoading(false);
     }
   }, [searchTerm]);
@@ -47,7 +70,6 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const contextValue: AppContextType = {
     loading,
     books,
-    searchTerm,
     setSearchTerm,
     resultTitle,
     setResultTitle
@@ -60,12 +82,5 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }
 
 
-export const useGlobalContext = (): AppContextType => {
-  const context = useContext(AppContext);
-  if (!context) {
-    throw new Error("useGlobalContext must be used within an AppProvider");
-  }
-  return context;
-};
 
 export { AppContext, AppProvider };

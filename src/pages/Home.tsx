@@ -1,16 +1,10 @@
-import { AccountCircle, Search } from "@mui/icons-material";
 import {
-  IconButton,
-  InputAdornment,
-  OutlinedInput,
-  
   Typography,
 } from "@mui/material";
-import { Form } from "react-router-dom";
 import SearchForm from "../components/SearchForm";
 
 const style = {
-  minHeight: "75vh",
+  minHeight: "45vh",
   display: "flex",
   flexDirection: "column" as const,
   justifyContent: "center",

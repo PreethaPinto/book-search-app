@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import BookList from './components/BookList'
 import BookDetails from './components/BookDetails'
+import Favorites from './components/Favorites'
 import { AppProvider } from './context'
 
 
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       {path: '/about', element: <About />},
       {path: '/book', element: <BookList />},
       {path: '/book/:id', element: <BookDetails />},
+      {path: '/favorites', element: <Favorites />}
 
 ]}
 ])
