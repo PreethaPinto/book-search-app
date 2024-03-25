@@ -1,8 +1,6 @@
 import { useGlobalContext } from "../GlobalContext"
 import Book from "./Book";
-
-//https://covers.openlibrary.org/b/id/240727-S.jpg
-
+import Loader from "./Loader";
 
 const BookList = () => {
   const {books, loading, resultTitle} = useGlobalContext();
@@ -14,7 +12,7 @@ const BookList = () => {
    }
   });
 
-  console.log(booksWithCovers)
+  if(loading) return <Loader />
 
   return (
    <section>

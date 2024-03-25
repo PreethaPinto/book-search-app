@@ -41,15 +41,16 @@ const SearchForm = () => {
       inputRef={searchText}
       endAdornment={
         <InputAdornment position="end">
-          <Button type='submit'  sx={{ backgroundColor: "rgb(241, 227, 211)" }}>
+          <Button type='submit'  sx={{ backgroundColor: "rgb(241, 227, 211)",  }}>
             <Search sx={{ color: "rgb(0,0,0)" }} />
           </Button>
         </InputAdornment>
       }
       sx={{
-        width: "400px",
+        width: "1000px",
         background: "rgb(241, 227, 211)",
-        height: "40px",
+        height: "60px",
+        borderRadius: '10px',
         margin: '20px'}}              
     />
   </Form>
