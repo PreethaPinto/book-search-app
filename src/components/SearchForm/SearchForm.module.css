@@ -1,0 +1,23 @@
+.btn {
+    background-color: #f1e3d3;
+}
+
+.search {
+    color: #000; 
+}
+
+.input-bar {
+    width: 30vw;
+    background: #f1e3d3;
+    height: 60px;
+    border-radius: 10px;
+    margin: 20px;              
+}
+
+@media (max-width: 900px) {    
+    .input-bar {
+      width: 100%;
+      margin-left: 0;
+    }
+
+  }

@@ -1,0 +1,14 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url('../../../src/images/cover.jpg') center/cover no-repeat;
+}
+
+.text {
+  color: #ffa500;
+  margin: '20px';
+}

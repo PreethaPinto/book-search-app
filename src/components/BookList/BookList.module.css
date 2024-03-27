@@ -1,0 +1,22 @@
+.title {
+  text-align: center;
+  padding: 1.2rem;
+  font-weight: bold;
+}
+
+.container {
+  width:70vw;
+  margin: 2rem auto;
+}
+
+@media (max-width: 400px) {
+  .container {
+    width: 77vw;
+  }
+}
+
+
+
+
+
+

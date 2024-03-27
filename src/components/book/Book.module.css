@@ -1,0 +1,42 @@
+.paper {
+  width: 320px;
+  height: 420px;
+  margin-bottom: 1rem;
+  margin: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  overflow: hidden;
+}
+
+.book-image {
+  width: 140px;
+  height: 200px;
+  margin-top: 1rem;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
+}
+
+.link:hover {
+  text-decoration: underline;
+  font-size: 1.3rem;
+}
+
+.content-box {
+  width: 300px;
+  margin: 20px;
+}
+

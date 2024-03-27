@@ -1,0 +1,17 @@
+.loader {
+    padding: 4rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader-image {
+    width: 120px;
+}
+
+@media (max-width: 600px) {
+   .loader-image {
+    width: 80px;
+   } 
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, ReactNode, useCallback } from "react";
 
-import { Book } from "./components/interfaces/Book.Interface";
+import { Book } from "./interfaces/Book.Interface";
 
 interface AppContextType {
   loading: boolean;
@@ -8,6 +8,7 @@ interface AppContextType {
   setSearchTerm: (term: string) => void;
   resultTitle: string;
   setResultTitle: (title: string) => void;
+  author: string[];
 }
 
 const URL = "https://openlibrary.org/search.json?title=";
@@ -20,6 +21,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [resultTitle, setResultTitle] = useState<string>('');
+  const [authorName] = useState<string[]>([]);
 
   const fetchBooks = useCallback(async () => {
     setLoading(true);
@@ -33,10 +35,12 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       if (docs) {
         const newBooks = docs.slice(0, 20).map((bookSingle: Book) => {
           const {key, author_name, cover_i, edition_count, first_publish_year, title, cover_img} = bookSingle;
+          const authors = Array.isArray(author_name) ? author_name.join(', ') : author_name;
 
+          console.log(authors)
           return {
             id: key,
-            author: author_name,
+            author: authors,
             edition_count,
             cover_id: cover_i,
             first_publish_year,
@@ -44,6 +48,7 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
             cover_img
           }
         });
+        
         setBooks(newBooks);
 
         if(newBooks.length> 1) {
@@ -72,7 +77,8 @@ const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     books,
     setSearchTerm,
     resultTitle,
-    setResultTitle
+    setResultTitle,
+    author: authorName
   };
 
   return (
